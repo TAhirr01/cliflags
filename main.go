@@ -1,4 +1,4 @@
-package cliFlags
+package cliflags
 
 import (
 	"os"
@@ -7,22 +7,22 @@ import (
 
 var registeredFlags = make(map[string]any)
 
-type Flags struct {
+type flags struct {
 	Name  string
 	Value string
 }
 
 // func main() {
-// 	name := registerFlag("name")
-// 	age := registerFlag("age")
+// 	name := RegisterFlag("name")
+// 	age := RegisterFlag("age")
 
-// 	parseFlags()
+// 	ParseFlags()
 // 	fmt.Print(name.Value)
 // 	fmt.Print(age.Value)
 
 // }
 
-func parseFlags() {
+func ParseFlags() {
 	flags := os.Args[1:]
 	flagMap := make(map[string]any)
 	for _, flag := range flags {
@@ -35,15 +35,15 @@ func parseFlags() {
 func getValues(req map[string]any) {
 	for k, v := range req {
 		if pointer, ok := registeredFlags[k]; ok {
-			if f, ok := pointer.(*Flags); ok {
+			if f, ok := pointer.(*flags); ok {
 				f.Value = v.(string)
 			}
 		}
 	}
 }
 
-func registerFlag(name string) *Flags {
-	f := &Flags{Name: name}
+func RegisterFlag(name string) *flags {
+	f := &flags{Name: name}
 	registeredFlags[name] = f
 	return f
 }
