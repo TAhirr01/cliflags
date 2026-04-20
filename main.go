@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -14,25 +12,24 @@ type Flags struct {
 	Value string
 }
 
-func main() {
-	// name := registerFlag("name")
-	// age := registerFlag("age")
+// func main() {
+// 	name := registerFlag("name")
+// 	age := registerFlag("age")
 
-	// mymap := parseFlags()
-	// getValues(mymap)
-	// fmt.Print(name.Value)
-	// fmt.Print(age.Value)
-	fmt.Print(runtime.GOMAXPROCS(0))
-}
+// 	parseFlags()
+// 	fmt.Print(name.Value)
+// 	fmt.Print(age.Value)
 
-func parseFlags() map[string]any {
+// }
+
+func parseFlags() {
 	flags := os.Args[1:]
 	flagMap := make(map[string]any)
 	for _, flag := range flags {
 		pair := strings.Split(flag, "=")
 		flagMap[pair[0]] = pair[1]
 	}
-	return flagMap
+	getValues(flagMap)
 }
 
 func getValues(req map[string]any) {
